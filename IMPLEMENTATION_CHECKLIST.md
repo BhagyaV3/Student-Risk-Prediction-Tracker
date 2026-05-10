@@ -3,10 +3,10 @@
 ## Week 1-2: Backend Setup & Authentication
 
 ### Infrastructure
-- [ ] Set up FastAPI project structure
-- [ ] Create virtual environment and install dependencies
-- [ ] Set up PostgreSQL database (local or Docker)
-- [ ] Create `.env` file with database credentials
+- [x] Set up FastAPI project structure
+- [x] Create virtual environment and install dependencies
+- [x] Set up PostgreSQL database (local or Docker)
+- [x] Create `.env` file with database credentials
 
 ### Database & Models
 - [ ] Design database schema
@@ -23,13 +23,13 @@
 - [ ] Test authentication flow (manual or pytest)
 
 ### Project Structure
-- [ ] Organize code into app/routes, app/schemas, app/services
+- [x] Organize code into app/routes, app/schemas, app/services
 - [ ] Add basic error handling
 - [ ] Set up logging
-- [ ] Add CORS configuration for frontend
+- [x] Add CORS configuration for frontend
 
 ### Basic Endpoints
-- [ ] `GET /api/health` - health check
+- [x] `GET /api/health` - health check
 - [ ] `GET /api/auth/me` - get current user
 - [ ] Test all endpoints work
 

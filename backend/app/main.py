@@ -1,0 +1,38 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.database.db import engine, Base
+from app.config import settings
+
+# Create all database tables
+Base.metadata.create_all(bind=engine)
+
+# Create FastAPI app
+app = FastAPI(
+    title="Student Performance Tracker",
+    description="ML-powered student risk prediction API",
+    version="1.0.0"
+)
+
+# Add CORS middleware (allows frontend to communicate with backend)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Health check endpoint
+@app.get("/api/health")
+def health_check():
+    return {"status": "healthy"}
+
+# Startup event
+@app.on_event("startup")
+async def startup_event():
+    print("✅ FastAPI server started")
+
+# Shutdown event
+@app.on_event("shutdown")
+async def shutdown_event():
+    print("👋 FastAPI server shutting down")
