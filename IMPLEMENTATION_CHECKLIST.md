@@ -267,7 +267,7 @@
 
 ## Progress Tracker
 
-### Week 1-2 Progress: ___/100
+### Week 1-2 Progress: 40/100
 ### Week 3-4 Progress: ___/100
 ### Week 5-6 Progress: ___/100
 ### Week 7-8 Progress: ___/100
