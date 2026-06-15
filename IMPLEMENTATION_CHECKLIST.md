@@ -9,17 +9,17 @@
 - [x] Create `.env` file with database credentials
 
 ### Database & Models
-- [ ] Design database schema
-- [ ] Create SQLAlchemy models for User, Student
+- [x] Design database schema
+- [x] Create SQLAlchemy models for User, Student
 - [ ] Set up Alembic migrations
 - [ ] Run initial migration
 
 ### Authentication
-- [ ] Implement JWT token generation/validation
-- [ ] Create password hashing (bcrypt)
-- [ ] Build `POST /api/auth/register` endpoint
-- [ ] Build `POST /api/auth/login` endpoint
-- [ ] Add JWT middleware/dependency injection
+- [x] Implement JWT token generation/validation
+- [x] Create password hashing (bcrypt)
+- [x] Build `POST /api/auth/register` endpoint
+- [x] Build `POST /api/auth/login` endpoint
+- [x] Add JWT middleware/dependency injection
 - [ ] Test authentication flow (manual or pytest)
 
 ### Project Structure
