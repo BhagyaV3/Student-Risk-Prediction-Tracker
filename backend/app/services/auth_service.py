@@ -1,21 +1,19 @@
 from datetime import datetime, timedelta
-from passlib.context import CryptContext
+import bcrypt
 from jose import JWTError, jwt
 from app.config import settings
-
-# Password hashing context
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class AuthService:
     @staticmethod
     def hash_password(password: str) -> str:
         """Hash a plain text password using bcrypt"""
-        return pwd_context.hash(password)
+        salt = bcrypt.gensalt()
+        return bcrypt.hashpw(password.encode(), salt).decode()
 
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
         """Verify a plain text password against a hashed password"""
-        return pwd_context.verify(plain_password, hashed_password)
+        return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
 
     @staticmethod
     def create_access_token(data: dict, expires_delta: timedelta = None) -> str:
@@ -47,4 +45,4 @@ class AuthService:
             )
             return payload
         except JWTError:
-            return None
+            return None            SELECT * FROM users;

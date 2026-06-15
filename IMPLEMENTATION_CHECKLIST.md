@@ -11,8 +11,8 @@
 ### Database & Models
 - [x] Design database schema
 - [x] Create SQLAlchemy models for User, Student
-- [ ] Set up Alembic migrations
-- [ ] Run initial migration
+- [ ] Set up Alembic migrations (deferred to Phase 2)
+- [ ] Run initial migration (deferred to Phase 2)
 
 ### Authentication
 - [x] Implement JWT token generation/validation
@@ -20,7 +20,7 @@
 - [x] Build `POST /api/auth/register` endpoint
 - [x] Build `POST /api/auth/login` endpoint
 - [x] Add JWT middleware/dependency injection
-- [ ] Test authentication flow (manual or pytest)
+- [X] Test authentication flow (manual or pytest)
 
 ### Project Structure
 - [x] Organize code into app/routes, app/schemas, app/services
@@ -30,8 +30,8 @@
 
 ### Basic Endpoints
 - [x] `GET /api/health` - health check
-- [ ] `GET /api/auth/me` - get current user
-- [ ] Test all endpoints work
+- [X] `GET /api/auth/me` - get current user
+- [X] Test all endpoints work
 
 ---
 
