@@ -57,8 +57,8 @@
 ### Testing
 - [x] Write pytest tests for student endpoints
 - [x] Write pytest tests for metrics endpoints
-- [ ] Test authorization (ensure only teacher can access their data)
-- [ ] Achieve >80% code coverage
+- [x] Test authorization (ensure only teacher can access their data)
+- [x] Achieve >80% code coverage
 
 ### Documentation
 - [ ] Add docstrings to all functions
