@@ -55,8 +55,8 @@
 - [x] Add validation (0-100 for percentages, 0-4.0 for GPA, etc.)
 
 ### Testing
-- [ ] Write pytest tests for student endpoints
-- [ ] Write pytest tests for metrics endpoints
+- [x] Write pytest tests for student endpoints
+- [x] Write pytest tests for metrics endpoints
 - [ ] Test authorization (ensure only teacher can access their data)
 - [ ] Achieve >80% code coverage
 
