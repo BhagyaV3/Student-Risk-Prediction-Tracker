@@ -45,4 +45,4 @@ class AuthService:
             )
             return payload
         except JWTError:
-            return None            SELECT * FROM users;
+            return None

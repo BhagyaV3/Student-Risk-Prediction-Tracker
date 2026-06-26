@@ -20,7 +20,7 @@
 - [x] Build `POST /api/auth/register` endpoint
 - [x] Build `POST /api/auth/login` endpoint
 - [x] Add JWT middleware/dependency injection
-- [X] Test authentication flow (manual or pytest)
+- [x] Test authentication flow (manual or pytest)
 
 ### Project Structure
 - [x] Organize code into app/routes, app/schemas, app/services
@@ -30,29 +30,29 @@
 
 ### Basic Endpoints
 - [x] `GET /api/health` - health check
-- [X] `GET /api/auth/me` - get current user
-- [X] Test all endpoints work
+- [x] `GET /api/auth/me` - get current user
+- [x] Test all endpoints work
 
 ---
 
 ## Week 3-4: Student Management & Metrics
 
 ### Student CRUD
-- [ ] Create Student SQLAlchemy model
-- [ ] Build `POST /api/students` (add student)
-- [ ] Build `GET /api/students` (list students with pagination)
-- [ ] Build `GET /api/students/{id}` (view single student)
-- [ ] Build `PUT /api/students/{id}` (update student)
-- [ ] Build `DELETE /api/students/{id}` (delete student)
-- [ ] Add validation with Pydantic schemas
-- [ ] Add authorization (teacher can only see their own students)
+- [x] Create Student SQLAlchemy model
+- [x] Build `POST /api/students` (add student)
+- [x] Build `GET /api/students` (list students with pagination)
+- [x] Build `GET /api/students/{id}` (view single student)
+- [x] Build `PUT /api/students/{id}` (update student)
+- [x] Build `DELETE /api/students/{id}` (delete student)
+- [x] Add validation with Pydantic schemas
+- [x] Add authorization (teacher can only see their own students)
 
 ### Academic Metrics
-- [ ] Create AcademicMetrics SQLAlchemy model
-- [ ] Build `POST /api/students/{id}/metrics` (record metrics)
-- [ ] Build `GET /api/students/{id}/metrics` (list metrics with pagination)
-- [ ] Build `GET /api/students/{id}/metrics/latest` (get most recent)
-- [ ] Add validation (0-100 for percentages, 0-4.0 for GPA, etc.)
+- [x] Create AcademicMetrics SQLAlchemy model
+- [x] Build `POST /api/students/{id}/metrics` (record metrics)
+- [x] Build `GET /api/students/{id}/metrics` (list metrics with pagination)
+- [x] Build `GET /api/students/{id}/metrics/latest` (get most recent)
+- [x] Add validation (0-100 for percentages, 0-4.0 for GPA, etc.)
 
 ### Testing
 - [ ] Write pytest tests for student endpoints

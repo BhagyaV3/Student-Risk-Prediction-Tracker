@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database.db import engine, Base
 from app.config import settings
 from app.routes.auth import router as auth_router
+from app.routes.students import router as students_router
 
 # Create all database tables
 Base.metadata.create_all(bind=engine)
@@ -30,6 +31,9 @@ def health_check():
 
 # Include auth routes
 app.include_router(auth_router)
+
+# Include student routes
+app.include_router(students_router)
 
 # Startup event
 @app.on_event("startup")
