@@ -11,8 +11,8 @@
 ### Database & Models
 - [x] Design database schema
 - [x] Create SQLAlchemy models for User, Student
-- [ ] Set up Alembic migrations (deferred to Phase 2)
-- [ ] Run initial migration (deferred to Phase 2)
+- [x] Set up Alembic migrations (deferred to Phase 2)
+- [x] Run initial migration (deferred to Phase 2)
 
 ### Authentication
 - [x] Implement JWT token generation/validation
