@@ -24,8 +24,8 @@
 
 ### Project Structure
 - [x] Organize code into app/routes, app/schemas, app/services
-- [ ] Add basic error handling
-- [ ] Set up logging
+- [x] Add basic error handling
+- [x] Set up logging
 - [x] Add CORS configuration for frontend
 
 ### Basic Endpoints
@@ -61,9 +61,9 @@
 - [x] Achieve >80% code coverage
 
 ### Documentation
-- [ ] Add docstrings to all functions
-- [ ] Document API endpoint behavior
-- [ ] Verify Swagger docs at `/docs` are clear
+- [x] Add docstrings to all functions
+- [x] Document API endpoint behavior
+- [x] Verify Swagger docs at `/docs` are clear
 
 ---
 

@@ -1,9 +1,19 @@
-from fastapi import FastAPI
+import logging
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 from app.database.db import engine, Base
 from app.config import settings
 from app.routes.auth import router as auth_router
 from app.routes.students import router as students_router
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 # Create all database tables
 Base.metadata.create_all(bind=engine)
@@ -15,7 +25,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Add CORS middleware (allows frontend to communicate with backend)
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -23,6 +33,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Handle validation errors (e.g. missing required fields)
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    logger.warning(f"Validation error on {request.url}: {exc.errors()}")
+    return JSONResponse(
+        status_code=422,
+        content={"detail": exc.errors()}
+    )
+
+# Handle unexpected server errors
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unexpected error on {request.url}: {str(exc)}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error"}
+    )
 
 # Health check endpoint
 @app.get("/api/health")
@@ -38,9 +66,9 @@ app.include_router(students_router)
 # Startup event
 @app.on_event("startup")
 async def startup_event():
-    print("✅ FastAPI server started")
+    logger.info("FastAPI server started")
 
 # Shutdown event
 @app.on_event("shutdown")
 async def shutdown_event():
-    print("👋 FastAPI server shutting down")
+    logger.info("FastAPI server shutting down")
