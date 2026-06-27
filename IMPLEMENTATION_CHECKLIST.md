@@ -70,18 +70,18 @@
 ## Week 5-6: ML Model & Predictions
 
 ### Data Preparation
-- [ ] Create sample/synthetic training data (if needed)
-- [ ] Define features: attendance, GPA, assignment completion, test scores, behavior
-- [ ] Define target: risk_level (0=low, 1=medium, 2=high) or risk_score (0-1)
-- [ ] Create train/test split (80/20 or similar)
+- [x] Create sample/synthetic training data (if needed)
+- [x] Define features: attendance, GPA, assignment completion, test scores, behavior
+- [x] Define target: risk_level (0=low, 1=medium, 2=high) or risk_score (0-1)
+- [x] Create train/test split (80/20 or similar)
 
 ### Model Development
-- [ ] Explore data with pandas
-- [ ] Build feature engineering pipeline
-- [ ] Train Random Forest classifier (baseline)
-- [ ] Evaluate model (accuracy, precision, recall, F1)
-- [ ] Save model and scaler as `.pkl` files
-- [ ] Create `train.py` script for reproducibility
+- [x] Explore data with pandas
+- [x] Build feature engineering pipeline
+- [x] Train Random Forest classifier (baseline)
+- [x] Evaluate model (accuracy, precision, recall, F1)
+- [x] Save model and scaler as `.pkl` files
+- [x] Create `train.py` script for reproducibility
 
 ### ML Service Integration
 - [ ] Create `ml_service.py` to load and use model
