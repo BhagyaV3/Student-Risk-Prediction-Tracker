@@ -84,11 +84,11 @@
 - [x] Create `train.py` script for reproducibility
 
 ### ML Service Integration
-- [ ] Create `ml_service.py` to load and use model
-- [ ] Implement feature extraction from student metrics
-- [ ] Implement prediction function
-- [ ] Handle edge cases (missing data, new students)
-- [ ] Add confidence scores
+- [x] Create `ml_service.py` to load and use model
+- [x] Implement feature extraction from student metrics
+- [x] Implement prediction function
+- [x] Handle edge cases (missing data, new students)
+- [x] Add confidence scores
 
 ### Prediction Endpoints
 - [ ] Build `POST /api/predictions/predict` (predict for student(s))
