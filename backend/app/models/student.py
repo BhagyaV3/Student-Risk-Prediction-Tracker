@@ -18,6 +18,8 @@ class Student(Base):
     teacher = relationship("User", back_populates="students")
     # Relationship to AcademicMetrics
     metrics = relationship("AcademicMetrics", back_populates="student", cascade="all, delete-orphan")
+    # Relationship to Prediction
+    predictions = relationship("Prediction", back_populates="student", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<Student(id={self.id}, name={self.first_name} {self.last_name}, teacher_id={self.teacher_id})>"

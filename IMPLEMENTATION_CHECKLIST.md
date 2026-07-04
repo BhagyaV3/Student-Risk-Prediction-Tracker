@@ -91,11 +91,11 @@
 - [x] Add confidence scores
 
 ### Prediction Endpoints
-- [ ] Build `POST /api/predictions/predict` (predict for student(s))
-- [ ] Build `GET /api/students/{id}/predictions` (prediction history)
-- [ ] Build `GET /api/students/{id}/predictions/latest` (most recent)
-- [ ] Store predictions in database with timestamp
-- [ ] Store feature contributions (SHAP or feature importance)
+- [x] Build `POST /api/predictions/predict` (predict for student(s))
+- [x] Build `GET /api/students/{id}/predictions` (prediction history)
+- [x] Build `GET /api/students/{id}/predictions/latest` (most recent)
+- [x] Store predictions in database with timestamp
+- [x] Store feature contributions (SHAP or feature importance)
 
 ### Testing & Validation
 - [ ] Write tests for ML service
@@ -267,14 +267,14 @@
 
 ## Progress Tracker
 
-### Week 1-2 Progress: 40/100
-### Week 3-4 Progress: ___/100
-### Week 5-6 Progress: ___/100
-### Week 7-8 Progress: ___/100
-### Week 9-10 Progress: ___/100
-### Week 11-12 Progress: ___/100
+### Week 1-2 Progress: 100/100
+### Week 3-4 Progress: 100/100
+### Week 5-6 Progress: 63/100
+### Week 7-8 Progress: 0/100
+### Week 9-10 Progress: 0/100
+### Week 11-12 Progress: 0/100
 
-**Overall Completion**: ___/100%
+**Overall Completion**: 35/100%
 
 ---
 

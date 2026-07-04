@@ -7,6 +7,7 @@ from app.database.db import engine, Base
 from app.config import settings
 from app.routes.auth import router as auth_router
 from app.routes.students import router as students_router
+from app.routes.predictions import router as predictions_router
 
 # Configure logging
 logging.basicConfig(
@@ -62,6 +63,9 @@ app.include_router(auth_router)
 
 # Include student routes
 app.include_router(students_router)
+
+# Include prediction routes
+app.include_router(predictions_router)
 
 # Startup event
 @app.on_event("startup")

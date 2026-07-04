@@ -4,6 +4,8 @@ from app.database.db import get_db
 from app.models.user import User
 from app.models.student import Student
 from app.models.academic_metrics import AcademicMetrics
+from app.models.prediction import Prediction
+from app.schemas.prediction import PredictionResponse
 from app.schemas.student import (
     StudentCreate, StudentUpdate, StudentResponse, 
     AcademicMetricsCreate, AcademicMetricsResponse, StudentDetailResponse
@@ -174,3 +176,43 @@ def get_latest_metrics(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No metrics found")
     
     return metrics
+
+# List Prediction History
+@router.get("/{student_id}/predictions", response_model=list[PredictionResponse])
+def list_predictions(
+    student_id: int,
+    skip: int = 0,
+    limit: int = 20,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """List all predictions for a student, newest first."""
+    get_student_or_403(student_id, current_user, db)
+    predictions = (
+        db.query(Prediction)
+        .filter(Prediction.student_id == student_id)
+        .order_by(Prediction.created_at.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    return predictions
+
+# Get Latest Prediction
+@router.get("/{student_id}/predictions/latest", response_model=PredictionResponse)
+def get_latest_prediction(
+    student_id: int,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Get the most recent prediction for a student."""
+    get_student_or_403(student_id, current_user, db)
+    prediction = (
+        db.query(Prediction)
+        .filter(Prediction.student_id == student_id)
+        .order_by(Prediction.created_at.desc())
+        .first()
+    )
+    if not prediction:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No predictions found")
+    return prediction

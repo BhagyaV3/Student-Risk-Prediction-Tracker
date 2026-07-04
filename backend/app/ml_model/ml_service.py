@@ -23,7 +23,6 @@ class MLService:
     def __init__(self):
         self.model  = None
         self.scaler = None
-        self._load()
 
     def _load(self):
         """Load model and scaler from disk."""
@@ -45,6 +44,10 @@ class MLService:
         returns: dict with risk_level (str), risk_score (float), 
                  confidence (float), feature_importance (dict)
         """
+        
+        if self.model is None:
+            self._load()
+            
         # Extract features in correct order
         try:
             features = np.array([[metrics[f] for f in FEATURE_NAMES]])
