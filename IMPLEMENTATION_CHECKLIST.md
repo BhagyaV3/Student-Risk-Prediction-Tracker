@@ -98,10 +98,10 @@
 - [x] Store feature contributions (SHAP or feature importance)
 
 ### Testing & Validation
-- [ ] Write tests for ML service
-- [ ] Validate predictions make sense
-- [ ] Test edge cases (missing data, extreme values)
-- [ ] Document model assumptions
+- [x] Write tests for ML service
+- [x] Validate predictions make sense
+- [x] Test edge cases (missing data, extreme values)
+- [x] Document model assumptions
 
 ---
 
@@ -269,12 +269,12 @@
 
 ### Week 1-2 Progress: 100/100
 ### Week 3-4 Progress: 100/100
-### Week 5-6 Progress: 63/100
+### Week 5-6 Progress: 100/100
 ### Week 7-8 Progress: 0/100
 ### Week 9-10 Progress: 0/100
 ### Week 11-12 Progress: 0/100
 
-**Overall Completion**: 35/100%
+**Overall Completion**: 42/100%
 
 ---
 

@@ -1,3 +1,59 @@
+"""
+Model Assumptions & Design Decisions
+======================================
+
+Algorithm
+---------
+Random Forest classifier (sklearn RandomForestClassifier).
+  - 100 estimators, max_depth=10, class_weight="balanced", random_state=42.
+  - "balanced" weighting compensates for the class imbalance in training data
+    (50% low / 30% medium / 20% high).
+
+Training data
+-------------
+Synthetic data generated with np.random.seed(42), N=500 students.
+Features are drawn from overlapping uniform distributions per risk class:
+
+  Feature                          Low risk      Medium risk   High risk
+  ─────────────────────────────────────────────────────────────────────
+  attendance_percentage            80–100        60–85         0–65
+  gpa (0.0–4.0 scale)              2.8–4.0       1.8–3.0       0.0–2.0
+  assignment_completion_percentage 80–100        60–85         0–65
+  test_score_average               75–100        55–78         0–60
+  behavior_score                   75–100        55–80         0–60
+
+The overlap between adjacent classes is intentional — it reflects
+real-world ambiguity at the boundaries between risk levels.
+
+Pre-processing
+--------------
+All five features are standardised with StandardScaler (zero mean, unit
+variance) fitted on the training split only.  The fitted scaler is saved
+alongside the model and must be applied identically at inference time.
+
+Target variable
+---------------
+  0 → "low"    (≈50% of training samples)
+  1 → "medium" (≈30%)
+  2 → "high"   (≈20%)
+
+Outputs (from ml_service.predict)
+----------------------------------
+  risk_level        : str  – predicted class label ("low" / "medium" / "high")
+  risk_score        : float [0, 1] – P(high risk); used for ranking/sorting
+  confidence        : float [0, 1] – P(predicted class); model certainty
+  feature_importance: dict – global Gini importances from the forest (sum ≈ 1)
+
+Limitations
+-----------
+- Trained entirely on synthetic data; real-world performance may differ.
+- Importance values are global (forest-level), not per-student explanations.
+- Model does not handle temporal trends; each prediction is stateless.
+- Features outside the training distribution will be extrapolated by the
+  forest but may produce less reliable results.
+- Retraining is required when score scales or grading policies change.
+"""
+
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier

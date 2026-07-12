@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.database.db import get_db
 from app.models.user import User
 from app.models.student import Student
+from app.models.academic_metrics import AcademicMetrics
 from app.models.prediction import Prediction
 from app.schemas.prediction import PredictionRequest, PredictionResponse
 from app.services.dependencies import get_current_user
@@ -31,9 +32,9 @@ def predict(
     student = get_student_or_403(request.student_id, current_user, db)
 
     latest_metrics = (
-        db.query(student.metrics.__class__)
+        db.query(AcademicMetrics)
         .filter_by(student_id=student.id)
-        .order_by(student.metrics.__class__.recorded_date.desc())
+        .order_by(AcademicMetrics.recorded_date.desc())
         .first()
     )
     if not latest_metrics:
