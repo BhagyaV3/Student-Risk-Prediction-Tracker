@@ -108,40 +108,40 @@
 ## Week 7-8: Frontend - Core Pages
 
 ### Project Setup
-- [ ] Create React app with Vite
-- [ ] Set up routing (react-router-dom)
-- [ ] Create basic layout/header component
-- [ ] Add CSS/styling (Tailwind or basic CSS)
+- [x] Create React app with Vite
+- [x] Set up routing (react-router-dom)
+- [x] Create basic layout/header component
+- [x] Add CSS/styling (Tailwind or basic CSS)
 
 ### Authentication UI
-- [ ] Build login form component
-- [ ] Build register form component
-- [ ] Build login page
-- [ ] Implement authentication context/state management
-- [ ] Store JWT token (localStorage)
-- [ ] Add protected routes (redirect to login if not authenticated)
+- [x] Build login form component
+- [x] Build register form component
+- [x] Build login page
+- [x] Implement authentication context/state management
+- [x] Store JWT token (localStorage)
+- [x] Add protected routes (redirect to login if not authenticated)
 
 ### API Client
-- [ ] Create axios wrapper/service for API calls
-- [ ] Handle authentication headers (JWT)
-- [ ] Handle error responses
-- [ ] Add request/response interceptors
+- [x] Create axios wrapper/service for API calls
+- [x] Handle authentication headers (JWT)
+- [x] Handle error responses
+- [x] Add request/response interceptors
 
 ### Student List Page
-- [ ] Create student list component
-- [ ] Fetch students from backend
-- [ ] Display in table/card format
-- [ ] Add pagination
-- [ ] Add search/filter by name
-- [ ] Add delete functionality
+- [x] Create student list component
+- [x] Fetch students from backend
+- [x] Display in table/card format
+- [x] Add pagination
+- [x] Add search/filter by name
+- [x] Add delete functionality
 
 ### Student Detail Page
-- [ ] Create student detail component
-- [ ] Show student info
-- [ ] Show recent metrics
-- [ ] Show latest prediction (risk level, score)
-- [ ] Show risk contributing factors
-- [ ] Add edit button to go to edit form
+- [x] Create student detail component
+- [x] Show student info
+- [x] Show recent metrics
+- [x] Show latest prediction (risk level, score)
+- [x] Show risk contributing factors
+- [x] Add edit button to go to edit form
 
 ### Testing & Polish
 - [ ] Test all components load correctly
@@ -270,11 +270,11 @@
 ### Week 1-2 Progress: 100/100
 ### Week 3-4 Progress: 100/100
 ### Week 5-6 Progress: 100/100
-### Week 7-8 Progress: 0/100
+### Week 7-8 Progress: 88/100
 ### Week 9-10 Progress: 0/100
 ### Week 11-12 Progress: 0/100
 
-**Overall Completion**: 42/100%
+**Overall Completion**: 57/100%
 
 ---
 
