@@ -196,7 +196,20 @@ def list_predictions(
         .limit(limit)
         .all()
     )
-    return predictions
+    return [
+        {
+            "id": prediction.id,
+            "student_id": prediction.student_id,
+            "prediction_label": prediction.risk_level,
+            "prediction_score": prediction.risk_score,
+            "confidence": prediction.confidence,
+            "feature_importance": prediction.feature_importance,
+            "created_at": prediction.created_at,
+            "risk_level": prediction.risk_level,
+            "risk_score": prediction.risk_score,
+        }
+        for prediction in predictions
+    ]
 
 # Get Latest Prediction
 @router.get("/{student_id}/predictions/latest", response_model=PredictionResponse)
@@ -215,4 +228,14 @@ def get_latest_prediction(
     )
     if not prediction:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No predictions found")
-    return prediction
+    return {
+        "id": prediction.id,
+        "student_id": prediction.student_id,
+        "prediction_label": prediction.risk_level,
+        "prediction_score": prediction.risk_score,
+        "confidence": prediction.confidence,
+        "feature_importance": prediction.feature_importance,
+        "created_at": prediction.created_at,
+        "risk_level": prediction.risk_level,
+        "risk_score": prediction.risk_score,
+    }

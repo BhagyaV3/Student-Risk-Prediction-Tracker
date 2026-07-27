@@ -2,7 +2,14 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import api from '../api/client'
 
-const RISK_CLASS = { low: 'badge-low', medium: 'badge-medium', high: 'badge-high' }
+const PREDICTION_CLASS = {
+  low: 'badge-low',
+  medium: 'badge-medium',
+  high: 'badge-high',
+  dropout: 'badge-high',
+  enrolled: 'badge-medium',
+  graduate: 'badge-low',
+}
 
 export default function StudentDetailPage() {
   const { id } = useParams()
@@ -60,21 +67,21 @@ export default function StudentDetailPage() {
 
         {/* ── Risk prediction ────────────────────────── */}
         <div className="card">
-          <h2>Risk Prediction</h2>
+          <h2>Prediction</h2>
           {prediction ? (
             <>
               <div className="prediction-summary">
-                <span className={`badge ${RISK_CLASS[prediction.risk_level]}`}>
-                  {prediction.risk_level.toUpperCase()} RISK
+                <span className={`badge ${PREDICTION_CLASS[prediction.prediction_label || prediction.risk_level]}`}>
+                  {(prediction.prediction_label || prediction.risk_level).toUpperCase()}
                 </span>
                 <div className="risk-score-bar">
                   <div
                     className="risk-score-fill"
-                    style={{ width: `${prediction.risk_score * 100}%` }}
+                    style={{ width: `${(prediction.prediction_score || prediction.risk_score) * 100}%` }}
                   />
                 </div>
                 <span className="text-muted" style={{ fontSize: '0.83rem' }}>
-                  Score: {(prediction.risk_score * 100).toFixed(1)}%
+                  Score: {((prediction.prediction_score || prediction.risk_score) * 100).toFixed(1)}%
                   &nbsp;·&nbsp;
                   Confidence: {(prediction.confidence * 100).toFixed(1)}%
                 </span>

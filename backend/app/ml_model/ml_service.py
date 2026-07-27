@@ -10,7 +10,7 @@ MODEL_DIR = os.path.dirname(__file__)
 MODEL_PATH  = os.path.join(MODEL_DIR, "model.pkl")
 SCALER_PATH = os.path.join(MODEL_DIR, "scaler.pkl")
 
-RISK_LABELS = {0: "low", 1: "medium", 2: "high"}
+PREDICTION_LABELS = {0: "low", 1: "medium", 2: "high"}
 FEATURE_NAMES = [
     "attendance_percentage",
     "gpa",
@@ -61,9 +61,9 @@ class MLService:
         risk_index  = int(self.model.predict(features_scaled)[0])
         probabilities = self.model.predict_proba(features_scaled)[0]
 
-        risk_label  = RISK_LABELS[risk_index]
+        prediction_label = PREDICTION_LABELS[risk_index]
         confidence  = float(probabilities[risk_index])
-        risk_score  = float(probabilities[2])  # probability of high risk (0.0–1.0)
+        prediction_score  = float(probabilities[2])  # probability of highest-severity class (0.0–1.0)
 
         # Feature importance from the forest
         importances = self.model.feature_importances_
@@ -73,10 +73,13 @@ class MLService:
         }
 
         return {
-            "risk_level":         risk_label,
-            "risk_score":         round(risk_score, 4),
+            "prediction_label":   prediction_label,
+            "prediction_score":   round(prediction_score, 4),
             "confidence":         round(confidence, 4),
             "feature_importance": feature_importance,
+            # Backward-compatible aliases for the existing API/UI.
+            "risk_level":         prediction_label,
+            "risk_score":         round(prediction_score, 4),
         }
 
 

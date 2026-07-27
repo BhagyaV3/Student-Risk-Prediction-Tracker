@@ -55,12 +55,22 @@ def predict(
 
     prediction = Prediction(
         student_id=student.id,
-        risk_level=result["risk_level"],
-        risk_score=result["risk_score"],
+        risk_level=result["prediction_label"],
+        risk_score=result["prediction_score"],
         confidence=result["confidence"],
         feature_importance=result["feature_importance"],
     )
     db.add(prediction)
     db.commit()
     db.refresh(prediction)
-    return prediction
+    return {
+        "id": prediction.id,
+        "student_id": prediction.student_id,
+        "prediction_label": result["prediction_label"],
+        "prediction_score": result["prediction_score"],
+        "confidence": prediction.confidence,
+        "feature_importance": prediction.feature_importance,
+        "created_at": prediction.created_at,
+        "risk_level": prediction.risk_level,
+        "risk_score": prediction.risk_score,
+    }

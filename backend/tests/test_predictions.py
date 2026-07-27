@@ -2,8 +2,8 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 MOCK_PREDICTION = {
-    "risk_level": "high",
-    "risk_score": 0.82,
+    "prediction_label": "high",
+    "prediction_score": 0.82,
     "confidence": 0.91,
     "feature_importance": {
         "attendance_percentage": 0.42,
@@ -60,8 +60,8 @@ def test_predict_success(mock_predict, client: TestClient):
 
     assert response.status_code == 201
     data = response.json()
-    assert data["risk_level"] == "high"
-    assert data["risk_score"] == 0.82
+    assert data["prediction_label"] == "high"
+    assert data["prediction_score"] == 0.82
     assert data["confidence"] == 0.91
     assert "attendance_percentage" in data["feature_importance"]
     assert data["student_id"] == student_id
@@ -133,7 +133,7 @@ def test_get_latest_prediction(mock_predict, client: TestClient):
 
     assert response.status_code == 200
     data = response.json()
-    assert data["risk_level"] == "high"
+    assert data["prediction_label"] == "high"
     assert data["student_id"] == student_id
 
 

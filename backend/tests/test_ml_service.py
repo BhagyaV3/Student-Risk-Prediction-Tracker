@@ -12,7 +12,7 @@ import pytest
 import numpy as np
 from unittest.mock import patch
 
-from app.ml_model.ml_service import MLService, FEATURE_NAMES, RISK_LABELS
+from app.ml_model.ml_service import MLService, FEATURE_NAMES, PREDICTION_LABELS
 
 # ── Sample metrics ────────────────────────────────────────────────────────────
 
@@ -55,15 +55,22 @@ def service():
 class TestOutputStructure:
     def test_returns_all_required_keys(self, service):
         result = service.predict(LOW_RISK_METRICS)
-        assert set(result.keys()) == {"risk_level", "risk_score", "confidence", "feature_importance"}
+        assert set(result.keys()) == {
+            "prediction_label",
+            "prediction_score",
+            "confidence",
+            "feature_importance",
+            "risk_level",
+            "risk_score",
+        }
 
-    def test_risk_level_is_valid_label(self, service):
+    def test_prediction_label_is_valid_label(self, service):
         for metrics in [LOW_RISK_METRICS, MEDIUM_RISK_METRICS, HIGH_RISK_METRICS]:
-            assert service.predict(metrics)["risk_level"] in RISK_LABELS.values()
+            assert service.predict(metrics)["prediction_label"] in PREDICTION_LABELS.values()
 
-    def test_risk_score_in_valid_range(self, service):
+    def test_prediction_score_in_valid_range(self, service):
         for metrics in [LOW_RISK_METRICS, MEDIUM_RISK_METRICS, HIGH_RISK_METRICS]:
-            score = service.predict(metrics)["risk_score"]
+            score = service.predict(metrics)["prediction_score"]
             assert 0.0 <= score <= 1.0
 
     def test_confidence_in_valid_range(self, service):
@@ -80,9 +87,9 @@ class TestOutputStructure:
         total = sum(result["feature_importance"].values())
         assert abs(total - 1.0) < 0.01  # rounding tolerance across 5 features
 
-    def test_risk_score_is_float(self, service):
+    def test_prediction_score_is_float(self, service):
         result = service.predict(LOW_RISK_METRICS)
-        assert isinstance(result["risk_score"], float)
+        assert isinstance(result["prediction_score"], float)
 
     def test_confidence_is_float(self, service):
         result = service.predict(LOW_RISK_METRICS)
@@ -94,24 +101,24 @@ class TestOutputStructure:
 class TestPredictionSanity:
     def test_excellent_metrics_predict_low_risk(self, service):
         result = service.predict(LOW_RISK_METRICS)
-        assert result["risk_level"] == "low"
+        assert result["prediction_label"] == "low"
 
     def test_poor_metrics_predict_high_risk(self, service):
         result = service.predict(HIGH_RISK_METRICS)
-        assert result["risk_level"] == "high"
+        assert result["prediction_label"] == "high"
 
     def test_low_risk_score_lower_than_high_risk_score(self, service):
-        low_score  = service.predict(LOW_RISK_METRICS)["risk_score"]
-        high_score = service.predict(HIGH_RISK_METRICS)["risk_score"]
+        low_score  = service.predict(LOW_RISK_METRICS)["prediction_score"]
+        high_score = service.predict(HIGH_RISK_METRICS)["prediction_score"]
         assert low_score < high_score
 
     def test_high_risk_student_risk_score_above_half(self, service):
         result = service.predict(HIGH_RISK_METRICS)
-        assert result["risk_score"] >= 0.5
+        assert result["prediction_score"] >= 0.5
 
     def test_low_risk_student_risk_score_below_half(self, service):
         result = service.predict(LOW_RISK_METRICS)
-        assert result["risk_score"] < 0.5
+        assert result["prediction_score"] < 0.5
 
     def test_deterministic_output(self, service):
         """Same inputs should always produce the same output."""
@@ -131,12 +138,12 @@ class TestEdgeCases:
     def test_extra_keys_in_metrics_are_ignored(self, service):
         metrics_with_extra = {**LOW_RISK_METRICS, "unknown_field": 999}
         result = service.predict(metrics_with_extra)
-        assert result["risk_level"] in RISK_LABELS.values()
+        assert result["prediction_label"] in PREDICTION_LABELS.values()
 
     def test_zero_values_predict_high_risk(self, service):
         zero_metrics = {f: 0.0 for f in FEATURE_NAMES}
         result = service.predict(zero_metrics)
-        assert result["risk_level"] == "high"
+        assert result["prediction_label"] == "high"
 
     def test_maximum_values_predict_low_risk(self, service):
         max_metrics = {
@@ -147,7 +154,7 @@ class TestEdgeCases:
             "behavior_score": 100.0,
         }
         result = service.predict(max_metrics)
-        assert result["risk_level"] == "low"
+        assert result["prediction_label"] == "low"
 
     def test_empty_dict_raises_value_error(self, service):
         with pytest.raises(ValueError, match="Missing required metric"):

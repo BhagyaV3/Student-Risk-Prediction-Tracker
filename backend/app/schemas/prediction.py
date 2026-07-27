@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Dict
+from typing import Dict, Optional
 
 class PredictionRequest(BaseModel):
     student_id: int
@@ -15,11 +15,13 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     id: int
     student_id: int
-    risk_level: str
-    risk_score: float
+    prediction_label: str
+    prediction_score: float
     confidence: float
     feature_importance: Dict[str, float]
     created_at: datetime
+    risk_level: Optional[str] = None
+    risk_score: Optional[float] = None
 
     class Config:
         from_attributes = True
